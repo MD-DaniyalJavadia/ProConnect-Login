@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Student App</title>
+
+    <style>
+        #backgroundimg {
+            background-image: url(./assets/prelogin-bg-D44e_fJt.jpg);
+            height: 100vh;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 40px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .heading {
+            color: white;
+            font-size: 64px;
+            font-weight: 700;
+        }
+
+        .subheading {
+            color: white;
+            font-size: 24px;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        .btn {
+            background-color: rgb(243, 113, 32);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            width: 220px;
+            border: none;
+            cursor: pointer;
+            box-shadow: rgba(14, 14, 44, 0.2) 1px 1px 10px 0.5px;
+            font-weight: 600;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="backgroundimg">
+
+        <img src="./assets/logo.svg" alt="Logo">
+
+        <div class="content">
+            <h1 class="heading">Crafting Digital Stories</h1>
+            <p class="subheading">
+                Empowering Creators, Managing Portfolios, Showcasing Brilliance
+            </p>
+        </div>
+
+        <button class="btn">LOGIN</button>
+
+        <div class="w-full flex items-center text-white text-sm mt-4">
+
+            <div class="flex-1 text-left ms-4">
+                MANAGED BY APTECH LIMITED
+            </div>
+
+            <span onclick="openModal()" class="cursor-pointer underline">
+                Terms and Conditions
+            </span>
+
+            <div class="flex-1"></div>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL -->
+    <div id="modal"
+        class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+
+        <div class="bg-white w-[90%] max-w-2xl rounded-2xl shadow-lg relative p-6">
+
+            <!-- Close Button -->
+            <button onclick="closeModal()"
+                class="absolute top-3 right-4 text-gray-500 text-2xl hover:text-black">
+                &times;
+            </button>
+
+            <h2 class="text-2xl font-bold text-center mb-4">
+                Privacy Policy 
+            </h2>
+
+            <!-- Scroll Content -->
+            <div class="max-h-[60vh] overflow-y-auto text-sm text-gray-700 leading-relaxed pr-2">
+
+                <p>
+                    "Proconnect" is committed to respecting the privacy of every person who shares information with
+                    Proconnect, including personal and sensitive data. We ensure reasonable protection and usage
+                    practices.
+                </p>
+
+                <h3 class="text-lg font-semibold mt-5">1. Information Collection</h3>
+                <p>We collect name, contact details, and usage data to improve our services.</p>
+
+                <h3 class="text-lg font-semibold mt-5">2. Use of Data</h3>
+                <p>Data is used for account management, services, and communication. We do not sell personal data.</p>
+
+                <h3 class="text-lg font-semibold mt-5">3. Data Security</h3>
+                <p>We use standard security measures but cannot guarantee 100% security.</p>
+
+                <h3 class="text-lg font-semibold mt-5">4. User Rights</h3>
+                <p>You may request access, update, or deletion of your data.</p>
+
+                <h2 class="text-xl font-bold mt-6 text-center">Terms and Conditions</h2>
+
+                <h3 class="text-lg font-semibold mt-5">1. Introduction</h3>
+                <p>By using the platform, you agree to these terms.</p>
+
+                <h3 class="text-lg font-semibold mt-5">2. User Conduct</h3>
+                <p>You must not misuse the platform or violate any laws.</p>
+
+                <h3 class="text-lg font-semibold mt-5">3. Intellectual Property</h3>
+                <p>All content belongs to the company and is protected.</p>
+
+                <h3 class="text-lg font-semibold mt-5">4. Limitation of Liability</h3>
+                <p>The company is not liable for any damages from usage.</p>
+
+                <h3 class="text-lg font-semibold mt-5">5. Contact</h3>
+                <p>support@aptechproconnect.com</p>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById("modal").classList.remove("hidden");
+        }
+
+        function closeModal() {
+            document.getElementById("modal").classList.add("hidden");
+        }
+
+        // Optional: close on outside click
+        document.getElementById("modal").addEventListener("click", function (e) {
+            if (e.target === this) closeModal();
+        });
+    </script>
+
+</body>
+
+</html>
