@@ -10,6 +10,11 @@
     <title>Student App</title>
 
     <style>
+        .loader-spinner {
+            border-top-color: rgb(243, 113, 32);
+            /* orange color */
+        }
+
         #backgroundimg {
             background-image: url(./assets/prelogin-bg-D44e_fJt.jpg);
             height: 100vh;
@@ -61,7 +66,15 @@
 </head>
 
 <body>
+    <div id="loader" class="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
+        <!-- Image Spinner -->
+        <img src="./assets/loader-DsU7QgP1.gif" alt="Loading..." class="w-16 h-16 mb-4">
 
+        <!-- Loader Text -->
+        <span class="text-gray-700 text-lg font-medium text-center px-4">
+            <strong>HANG TIGHT!</strong> We’re putting the final touches on your page.
+        </span>
+    </div>
     <div id="backgroundimg">
 
         <img src="./assets/logo.svg" alt="Logo">
@@ -73,7 +86,7 @@
             </p>
         </div>
 
-        <button class="btn">LOGIN</button>
+        <button onclick="window.location.href='login.html';" class="btn">LOGIN</button>
 
         <div class="w-full flex items-center text-white text-sm mt-4">
 
@@ -92,19 +105,17 @@
     </div>
 
     <!-- MODAL -->
-    <div id="modal"
-        class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
 
         <div class="bg-white w-[90%] max-w-2xl rounded-2xl shadow-lg relative p-6">
 
             <!-- Close Button -->
-            <button onclick="closeModal()"
-                class="absolute top-3 right-4 text-gray-500 text-2xl hover:text-black">
+            <button onclick="closeModal()" class="absolute top-3 right-4 text-gray-500 text-2xl hover:text-black">
                 &times;
             </button>
 
             <h2 class="text-2xl font-bold text-center mb-4">
-                Privacy Policy 
+                Privacy Policy
             </h2>
 
             <!-- Scroll Content -->
@@ -162,6 +173,11 @@
         // Optional: close on outside click
         document.getElementById("modal").addEventListener("click", function (e) {
             if (e.target === this) closeModal();
+        });
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+            }, 3000); // 3000 milliseconds = 3 seconds
         });
     </script>
 
