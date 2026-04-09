@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background: #f6f8fc;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+        }
+
+        /* HEADER */
+        .header {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 250px;
+            background: white;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar.collapsed {
+            width: 80px;
+        }
+
+        .sidebar.collapsed .hide-on-collapse {
+            display: none;
+        }
+
+        .sidebar.collapsed .submenu {
+            display: none !important;
+        }
+
+        .sidebar.collapsed .bi-chevron-down {
+            display: none !important;
+        }
+
+        /* MENU */
+        .menu-item {
+            padding: 12px 14px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background: #f3f4f6;
+        }
+
+        .menu-item.active {
+            background: #f97316;
+            color: white;
+        }
+
+        .sidebar.collapsed .menu-item {
+            justify-content: center;
+        }
+
+        /* SUBMENU */
+        .submenu {
+            position: relative;
+            padding-left: 45px;
+            margin-top: 8px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .submenu::before {
+            content: '';
+            position: absolute;
+            left: 22px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: #e5e7eb;
+        }
+
+        .submenu-item {
+            position: relative;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            font-size: 15px;
+            cursor: pointer;
+            background: white;
+        }
+
+        .submenu-item::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background: #d1d5db;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .submenu-item.active {
+            border: 2px solid #f97316;
+            color: #f97316;
+        }
+
+        .submenu-item.active::before {
+            background: #f97316;
+        }
+
+        .arrow {
+            margin-left: auto;
+        }
+
+        /* MAIN */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <img src="../assets/download.png" style="height:40px;">
+        <div class="flex gap-4 text-xl">
+            <i class="bi bi-telephone"></i>
+            <i class="bi bi-bell"></i>
+            <i class="bi bi-person-circle"></i>
+        </div>
+    </div>
+
+    <div class="flex">
+
+        <!-- SIDEBAR -->
+        <div id="sidebar" class="sidebar p-3">
+
+            <!-- Top -->
+            <div class="flex justify-between items-center mb-4">
+                <span id="dateText" class="hide-on-collapse text-sm"></span>
+                <button onclick="toggleSidebar()" class="btn btn-light btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.334 7.99883C13.334 8.15444 13.2722 8.30367 13.1621 8.4137C13.0521 8.52373 12.9029 8.58555 12.7473 8.58555H4.7761L7.88219 11.6905C7.99236 11.8006 8.05426 11.9501 8.05426 12.1059C8.05426 12.2617 7.99236 12.4111 7.88219 12.5213C7.77202 12.6314 7.6226 12.6933 7.4668 12.6933C7.31099 12.6933 7.16157 12.6314 7.0514 12.5213L2.94437 8.41423C2.88981 8.35972 2.84659 8.29495 2.81719 8.22365C2.78778 8.15236 2.77278 8.07595 2.77305 7.99883V13.866C2.77305 14.0216 2.71123 14.1709 2.6012 14.2809C2.49117 14.3909 2.34194 14.4527 2.18633 14.4527C2.03072 14.4527 1.88149 14.3909 1.77146 14.2809C1.66142 14.1709 1.59961 14.0216 1.59961 13.866V2.13164C1.59961 1.97603 1.66142 1.8268 1.77146 1.71677C1.88149 1.60674 2.03072 1.54492 2.18633 1.54492C2.34194 1.54492 2.49117 1.60674 2.6012 1.71677C2.71123 1.8268 2.77305 1.97603 2.77305 2.13164V7.99883C2.77305 7.84863 2.83055 7.69843 2.94437 7.58343L7.0514 3.4764C7.10595 3.42185 7.17071 3.37858 7.24199 3.34905C7.31326 3.31953 7.38965 3.30434 7.4668 3.30434C7.54394 3.30434 7.62033 3.31953 7.69161 3.34905C7.76288 3.37858 7.82764 3.42185 7.88219 3.4764C7.93674 3.53095 7.98002 3.59571 8.00954 3.66699C8.03906 3.73826 8.05426 3.81465 8.05426 3.8918C8.05426 3.96894 8.03906 4.04533 8.00954 4.11661C7.98002 4.18788 7.93674 4.25264 7.88219 4.30719L4.7761 7.41211H12.7473C12.9029 7.41211 13.0521 7.47392 13.1621 7.58396C13.2722 7.69399 13.334 7.84322 13.334 7.99883Z" fill="#4A4A68"></path></svg>
+                </button>
+            </div>
+
+            <!-- MENU -->
+            <div class="flex flex-col gap-2">
+
+                <div class="menu-item active">
+                    <i class="bi bi-journal-text"></i>
+                    <span class="hide-on-collapse">Course Details</span>
+                </div>
+
+                <div class="menu-item">
+                    <i class="bi bi-play-btn"></i>
+                    <span class="hide-on-collapse">Digital Content</span>
+                </div>
+
+                <!-- Academics -->
+                <div class="menu-item">
+                    <i class="bi bi-mortarboard"></i>
+                    <span class="hide-on-collapse">Academics</span>
+                    <i class="bi bi-chevron-down ms-auto"></i>
+                </div>
+
+                <div class="submenu hidden">
+                    <div class="submenu-item">Attendance</div>
+
+                    <div class="submenu-item active">
+                        ePerformance Statement
+                        <span class="arrow">›</span>
+                    </div>
+
+                    <div class="submenu-item">Performance Records</div>
+                </div>
+
+                <!-- Learning -->
+                <div class="menu-item">
+                    <i class="bi bi-book"></i>
+                    <span class="hide-on-collapse">Learning Circle</span>
+                    <i class="bi bi-chevron-down ms-auto"></i>
+                </div>
+
+                <div class="submenu hidden">
+                    <div class="submenu-item">Articles</div>
+                    <div class="submenu-item">Blogs</div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- MAIN -->
+         <div class="flex-1 p-4">
+            <h4>Courses (1)</h4>
+
+            <div class="bg-white p-4 rounded shadow mt-3 flex items-center gap-4">
+                 <div class="w-20 h-20 rounded-xl bg-blue-900 relative overflow-hidden">
+                    <div class="absolute w-20 h-20 bg-blue-700 rounded-full -bottom-6 -right-6"></div>
+                </div>
+
+
+                <div class="flex-1">
+                    <h5>ADSE</h5>
+                    <p class="text-gray-500">Attendance</p>
+
+                    <div class="progress" style="height:6px;">
+                        <div class="progress-bar" style="width:71.93%; background:#f97316;"></div>
+                    </div>
+                </div>
+
+                <div class="text-orange-500 fw-bold">71.93%</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const sidebar = document.getElementById("sidebar");
+
+        function toggleSidebar() {
+            sidebar.classList.toggle("collapsed");
+
+            if (sidebar.classList.contains("collapsed")) {
+                document.querySelectorAll('.submenu').forEach(menu => {
+                    menu.classList.add('hidden');
+                });
+            }
+        }
+
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function () {
+
+                const next = this.nextElementSibling;
+
+                if (next && next.classList.contains('submenu')) {
+
+                    if (sidebar.classList.contains("collapsed")) {
+                        sidebar.classList.remove("collapsed");
+                        return;
+                    }
+
+                    document.querySelectorAll('.submenu').forEach(menu => {
+                        if (menu !== next) {
+                            menu.classList.add('hidden');
+                        }
+                    });
+
+                    next.classList.toggle('hidden');
+                }
+            });
+        });
+
+        // Date
+        const today = new Date();
+        document.getElementById("dateText").innerText =
+            "Date: " + today.toLocaleDateString('en-GB');
+    </script>
+
+</body>
+
+</html>
