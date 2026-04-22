@@ -20,7 +20,6 @@
             margin: 0;
         }
 
-        /* HEADER */
         .header {
             height: 70px;
             background: white;
@@ -31,7 +30,6 @@
             padding: 0 20px;
         }
 
-        /* SIDEBAR */
         .sidebar {
             width: 250px;
             background: white;
@@ -57,7 +55,6 @@
             display: none !important;
         }
 
-        /* MENU */
         .menu-item {
             padding: 12px 14px;
             border-radius: 10px;
@@ -65,6 +62,8 @@
             align-items: center;
             gap: 12px;
             cursor: pointer;
+            text-decoration: none;
+            color: black;
         }
 
         .menu-item:hover {
@@ -80,7 +79,6 @@
             justify-content: center;
         }
 
-        /* SUBMENU */
         .submenu {
             position: relative;
             padding-left: 45px;
@@ -111,36 +109,26 @@
             background: white;
         }
 
-        .submenu-item::before {
-            content: '';
-            position: absolute;
-            left: -27px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 10px;
-            height: 10px;
-            background: #d1d5db;
-            border-radius: 50%;
-            border: 2px solid white;
-        }
-
         .submenu-item.active {
             border: 2px solid #f97316;
             color: #f97316;
-        }
-
-        .submenu-item.active::before {
-            background: #f97316;
         }
 
         .arrow {
             margin-left: auto;
         }
 
-        /* MAIN */
         .main-content {
             flex: 1;
             padding: 20px;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+        }
+
+        input::placeholder {
+            font-size: 14px;
         }
     </style>
 </head>
@@ -162,29 +150,32 @@
         <!-- SIDEBAR -->
         <div id="sidebar" class="sidebar p-3">
 
-            <!-- Top -->
-            <div class="flex justify-between items-center mb-4 ">
+            <div class="flex justify-between items-center mb-4">
                 <span id="dateText" class="hide-on-collapse text-sm"></span>
                 <button onclick="toggleSidebar()" class="btn btn-light btn-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.334 7.99883C13.334 8.15444 13.2722 8.30367 13.1621 8.4137C13.0521 8.52373 12.9029 8.58555 12.7473 8.58555H4.7761L7.88219 11.6905C7.99236 11.8006 8.05426 11.9501 8.05426 12.1059C8.05426 12.2617 7.99236 12.4111 7.88219 12.5213C7.77202 12.6314 7.6226 12.6933 7.4668 12.6933C7.31099 12.6933 7.16157 12.6314 7.0514 12.5213L2.94437 8.41423C2.88981 8.35972 2.84659 8.29495 2.81719 8.22365C2.78778 8.15236 2.77278 8.07595 2.77305 7.99883V13.866C2.77305 14.0216 2.71123 14.1709 2.6012 14.2809C2.49117 14.3909 2.34194 14.4527 2.18633 14.4527C2.03072 14.4527 1.88149 14.3909 1.77146 14.2809C1.66142 14.1709 1.59961 14.0216 1.59961 13.866V2.13164C1.59961 1.97603 1.66142 1.8268 1.77146 1.71677C1.88149 1.60674 2.03072 1.54492 2.18633 1.54492C2.34194 1.54492 2.49117 1.60674 2.6012 1.71677C2.71123 1.8268 2.77305 1.97603 2.77305 2.13164V7.99883C2.77305 7.84863 2.83055 7.69843 2.94437 7.58343L7.0514 3.4764C7.10595 3.42185 7.17071 3.37858 7.24199 3.34905C7.31326 3.31953 7.38965 3.30434 7.4668 3.30434C7.54394 3.30434 7.62033 3.31953 7.69161 3.34905C7.76288 3.37858 7.82764 3.42185 7.88219 3.4764C7.93674 3.53095 7.98002 3.59571 8.00954 3.66699C8.03906 3.73826 8.05426 3.81465 8.05426 3.8918C8.05426 3.96894 8.03906 4.04533 8.00954 4.11661C7.98002 4.18788 7.93674 4.25264 7.88219 4.30719L4.7761 7.41211H12.7473C12.9029 7.41211 13.0521 7.47392 13.1621 7.58396C13.2722 7.69399 13.334 7.84322 13.334 7.99883Z" fill="#4A4A68"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M13.334 7.99883C13.334 8.15444 13.2722 8.30367 13.1621 8.4137C13.0521 8.52373 12.9029 8.58555 12.7473 8.58555H4.7761L7.88219 11.6905C7.99236 11.8006 8.05426 11.9501 8.05426 12.1059C8.05426 12.2617 7.99236 12.4111 7.88219 12.5213C7.77202 12.6314 7.6226 12.6933 7.4668 12.6933C7.31099 12.6933 7.16157 12.6314 7.0514 12.5213L2.94437 8.41423C2.88981 8.35972 2.84659 8.29495 2.81719 8.22365C2.78778 8.15236 2.77278 8.07595 2.77305 7.99883V13.866C2.77305 14.0216 2.71123 14.1709 2.6012 14.2809C2.49117 14.3909 2.34194 14.4527 2.18633 14.4527C2.03072 14.4527 1.88149 14.3909 1.77146 14.2809C1.66142 14.1709 1.59961 14.0216 1.59961 13.866V2.13164C1.59961 1.97603 1.66142 1.8268 1.77146 1.71677C1.88149 1.60674 2.03072 1.54492 2.18633 1.54492C2.34194 1.54492 2.49117 1.60674 2.6012 1.71677C2.71123 1.8268 2.77305 1.97603 2.77305 2.13164V7.99883C2.77305 7.84863 2.83055 7.69843 2.94437 7.58343L7.0514 3.4764C7.10595 3.42185 7.17071 3.37858 7.24199 3.34905C7.31326 3.31953 7.38965 3.30434 7.4668 3.30434C7.54394 3.30434 7.62033 3.31953 7.69161 3.34905C7.76288 3.37858 7.82764 3.42185 7.88219 3.4764C7.93674 3.53095 7.98002 3.59571 8.00954 3.66699C8.03906 3.73826 8.05426 3.81465 8.05426 3.8918C8.05426 3.96894 8.03906 4.04533 8.00954 4.11661C7.98002 4.18788 7.93674 4.25264 7.88219 4.30719L4.7761 7.41211H12.7473C12.9029 7.41211 13.0521 7.47392 13.1621 7.58396C13.2722 7.69399 13.334 7.84322 13.334 7.99883Z"
+                            fill="#4A4A68"></path>
+                    </svg>
                 </button>
             </div>
 
-            <!-- MENU -->
             <div class="flex flex-col gap-2">
 
-                <div class="menu-item active">
+                <!-- LINKS -->
+                <a href="coursedetails.html" class="menu-item">
                     <i class="bi bi-journal-text"></i>
                     <span class="hide-on-collapse">Course Details</span>
-                </div>
+                </a>
 
-                <div class="menu-item">
+                <a href="digital-content.html" class="menu-item">
                     <i class="bi bi-play-btn"></i>
                     <span class="hide-on-collapse">Digital Content</span>
-                </div>
+                </a>
 
                 <!-- Academics -->
-                <div class="menu-item">
+                <div class="menu-item toggle-menu">
                     <i class="bi bi-mortarboard"></i>
                     <span class="hide-on-collapse">Academics</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
@@ -202,7 +193,7 @@
                 </div>
 
                 <!-- Learning -->
-                <div class="menu-item">
+                <div class="menu-item toggle-menu">
                     <i class="bi bi-book"></i>
                     <span class="hide-on-collapse">Learning Circle</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
@@ -214,11 +205,145 @@
                 </div>
 
             </div>
-
         </div>
 
         <!-- MAIN -->
-       
+        <div class="main-content">
+
+            <!-- ALERT -->
+            <div class="bg-warning text-dark p-3 rounded mb-4 fw-semibold">
+                Due to a technical issue, eBooks are currently not downloading.
+                We regret the inconvenience caused. Our team is working on resolving this.
+            </div>
+
+            <!-- TOP FILTER BAR -->
+            <div class="flex flex-wrap items-center gap-3 mb-4">
+
+                <div class="text-sm text-gray-600">Select Course</div>
+
+                <select class="form-select w-auto">
+                    <option>ADSE</option>
+                </select>
+
+                <div class="ms-3 text-sm">Terms :</div>
+
+                <button class="btn btn-outline-warning active">All</button>
+                <button class="btn btn-light">1</button>
+                <button class="btn btn-light">2</button>
+                <button class="btn btn-light">3</button>
+                <button class="btn btn-light">4</button>
+                <button class="btn btn-light">5</button>
+                <button class="btn btn-light">6</button>
+
+                <!-- SEARCH -->
+                <div class="ms-auto relative">
+                    <input type="text" placeholder="Books"
+                        class="form-control ps-5 pe-3 py-2 rounded-pill bg-light border-0">
+                    <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                </div>
+
+            </div>
+
+            <!-- SECTION TITLE -->
+            <h5 class="mb-3 fw-semibold">ACCP Prime-Term 1</h5>
+
+            <!-- BOOK GRID -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+
+                <!-- CARD -->
+                <div class="bg-white rounded-3 shadow-sm p-2 hover:shadow-md transition">
+                    <img src="../assets/Developing_Responsive_Websites_with_Bootstrap_and_jQuery_0.jpg" class="w-100 rounded">
+                    <div class="mt-2 small fw-semibold">
+                        Developing Responsive Websites with Bootstrap and jQuery
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3 shadow-sm p-2 hover:shadow-md transition">
+                    <img src="../assets/Inside_Microsoft_Office.jpg" class="w-100 rounded">
+                    <div class="mt-2 small fw-semibold">
+                        Inside Microsoft Office
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3 shadow-sm p-2 hover:shadow-md transition">
+                    <img src="../assets/Designing_Modernistic_Websites.jpg" class="w-100 rounded">
+                    <div class="mt-2 small fw-semibold">
+                        Designing Modernistic Websites
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3 shadow-sm p-2 hover:shadow-md transition">
+                    <img src="../assets/Elegant_and_Effective_Website_Design_with_UI_and_UX.jpg" class="w-100 rounded">
+                    <div class="mt-2 small fw-semibold">
+                        Elegant and Effective Website Design
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3 shadow-sm p-2 hover:shadow-md transition">
+                    <img src="../assets/A_Guide_to_Search_Optimization.jpg" class="w-100 rounded">
+                    <div class="mt-2 small fw-semibold">
+                        A Guide to Search Optimization
+                    </div>
+                </div>
+                <div class="bg-white rounded-3 shadow-sm p-2 hover:shadow-md transition">
+                    <img src="../assets/eProject_Guide_Responsive_Website_Development.jpg" class="w-100 rounded">
+                    <div class="mt-2 small fw-semibold">
+                       ePG-Responsive Website Development
+                    </div>
+                </div>
+                
+            </div>
+
+               <h5 class="my-4 fw-semibold">ACCP Prime-Term 2</h5>
+
+            <!-- BOOK GRID -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+
+                <!-- CARD -->
+                <div class="bg-white rounded-3 shadow-sm p-2 hover:shadow-md transition">
+                    <img src="../assets/Developing_Responsive_Websites_with_Bootstrap_and_jQuery_0.jpg" class="w-100 rounded">
+                    <div class="mt-2 small fw-semibold">
+                        Developing Responsive Websites with Bootstrap and jQuery
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3 shadow-sm p-2 hover:shadow-md transition">
+                    <img src="../assets/Inside_Microsoft_Office.jpg" class="w-100 rounded">
+                    <div class="mt-2 small fw-semibold">
+                        Inside Microsoft Office
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3 shadow-sm p-2 hover:shadow-md transition">
+                    <img src="../assets/Designing_Modernistic_Websites.jpg" class="w-100 rounded">
+                    <div class="mt-2 small fw-semibold">
+                        Designing Modernistic Websites
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3 shadow-sm p-2 hover:shadow-md transition">
+                    <img src="../assets/Elegant_and_Effective_Website_Design_with_UI_and_UX.jpg" class="w-100 rounded">
+                    <div class="mt-2 small fw-semibold">
+                        Elegant and Effective Website Design
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3 shadow-sm p-2 hover:shadow-md transition">
+                    <img src="../assets/A_Guide_to_Search_Optimization.jpg" class="w-100 rounded">
+                    <div class="mt-2 small fw-semibold">
+                        A Guide to Search Optimization
+                    </div>
+                </div>
+                <div class="bg-white rounded-3 shadow-sm p-2 hover:shadow-md transition">
+                    <img src="../assets/eProject_Guide_Responsive_Website_Development.jpg" class="w-100 rounded">
+                    <div class="mt-2 small fw-semibold">
+                        Developing Responsive Websites with Bootstrap and jQuery
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
 
     </div>
 
@@ -235,7 +360,8 @@
             }
         }
 
-        document.querySelectorAll('.menu-item').forEach(item => {
+        //  ONLY submenu toggle (links ko affect nahi karega)
+        document.querySelectorAll('.toggle-menu').forEach(item => {
             item.addEventListener('click', function () {
 
                 const next = this.nextElementSibling;
@@ -256,6 +382,19 @@
                     next.classList.toggle('hidden');
                 }
             });
+        });
+
+        //  ACTIVE MENU AUTO DETECT
+        const links = document.querySelectorAll('.menu-item');
+
+        links.forEach(link => {
+            if (link.tagName === "A") {
+                if (link.href === window.location.href) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            }
         });
 
         // Date
